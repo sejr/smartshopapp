@@ -69,30 +69,24 @@ angular.module('SmartShop', ['ionic', 'ui.router'])
   ];
 
   $scope.weighItem = function() {
-
-    var result = {
-      value: 0,
-      unit: ''
-    }
-
-    $http({
+    return $http({
       method: 'GET',
       url: 'https://jsonp.afeld.me/?url=http://smartshop-sjroot.rhcloud.com/api/readings'
-    }).then(function success(res) {
+    });
+  }
+
+  $scope.updateReading = function() {
+
+    // $scope.test = "Hi!";
+    $scope.weighItem().then(function success(res) {
+      // $scope.testlol = "Hi again!";
       console.log(res);
-      result.value = res.data.value;
-      result.unit = res.data.unit;
+      $scope.reading = res.data[0];
+      // $scope.reading.unit = res.data[0].unit;
     }, function error(res){
       console.log(res);
     });
 
-    return result;
-  }
-
-  $scope.updateReading = function() {
-    var reading = $scope.weighItem();
-    $scope.newItem.value = reading.value;
-    $scope.newItem.unit = reading.unit;
   }
 
   $scope.authenticated = false;

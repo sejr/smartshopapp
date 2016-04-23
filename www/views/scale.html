@@ -11,7 +11,7 @@
       important that you make sure the reading on the scale and the reading
       on the application are the same.
     </p>
-    <h3>Reading: {{ newItem.value }}</h3>
+    <h3>Reading: {{ reading.value }} {{ reading.unit }}</h3>
     <button ng-click="updateReading()" class="button button-full button-positive">
       <span class="ion-speedometer"></span> Check Scale
     </button>
