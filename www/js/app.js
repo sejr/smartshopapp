@@ -63,7 +63,7 @@ angular.module('SmartShop', ['ionic', 'ui.router'])
       name: "Test Product",
       code: 1234567890,
       weight_required: true,
-      weight: "0.3kg",
+      weight: "0.3 kg",
       cost: 7.99
     }
   ];
@@ -115,6 +115,20 @@ angular.module('SmartShop', ['ionic', 'ui.router'])
       });
       $state.go('cart');
     }
+  }
+
+  $scope.pushWt = function() {
+    var cost = $scope.newItem.value * 1.99;
+    var weight = $scope.newItem.value.toString() + " " + $scope.newItem.unit;
+    var weighedItem = {
+      name: 'Weighed Product',
+      code: $scope.newItem.code,
+      weight_required: true,
+      weight: weight,
+      cost: cost
+    };
+    $scope.cart.push(weighedItem);
+    $state.go('cart');
   }
 
   $scope.addItem = function() {
