@@ -1,0 +1,15 @@
+<ion-view view-title="Add Item">
+  <ion-nav-bar class="bar-light">
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+    <h1 class="title">My Cart</h1>
+  </ion-nav-bar>
+  <ion-content>
+    <label class="item item-input">
+      <input type="tel" ng-model="productCode" placeholder="Product Code">
+    </label>
+    <button class="button button-full button-balanced" ng-click="push(productCode)">
+      <span class="ion-plus"></span> Add Item
+    </button>
+  </ion-content>
+</ion-view>

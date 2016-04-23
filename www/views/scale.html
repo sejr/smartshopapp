@@ -1,0 +1,22 @@
+<ion-view view-title="Weigh Your Product">
+  <ion-nav-bar class="bar-light">
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+    <!-- <h1 class="title">My Cart</h1> -->
+  </ion-nav-bar>
+  <ion-content padding="true">
+    <p class="lead">Sorry for the inconvenience.</p>
+    <p>
+      The product you are trying to add to your cart must be weighed. It is
+      important that you make sure the reading on the scale and the reading
+      on the application are the same.
+    </p>
+    <h3>Reading: {{ newItem.value }}</h3>
+    <button ng-click="updateReading()" class="button button-full button-positive">
+      <span class="ion-speedometer"></span> Check Scale
+    </button>
+    <button class="button button-full button-balanced" ng-click="push(productCode, weight)">
+      <span class="ion-plus"></span> Add Item
+    </button>
+  </ion-content>
+</ion-view>
