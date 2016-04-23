@@ -81,7 +81,8 @@ angular.module('SmartShop', ['ionic', 'ui.router'])
     $scope.weighItem().then(function success(res) {
       // $scope.testlol = "Hi again!";
       console.log(res);
-      $scope.reading = res.data[0];
+      $scope.newItem.value = res.data[0].value;
+      $scope.newItem.unit = res.data[0].unit;
       // $scope.reading.unit = res.data[0].unit;
     }, function error(res){
       console.log(res);
