@@ -27,7 +27,7 @@ angular.module('SmartShop', ['ionic', 'ui.router'])
 
   $stateProvider
   .state('intro', {
-    url: '/intro',
+    url: '/',
     cache: false,
     templateUrl: 'index.html'
   })
@@ -44,6 +44,11 @@ angular.module('SmartShop', ['ionic', 'ui.router'])
     url: '/scale',
     cache: false,
     templateUrl: "views/scale.html"
+  })
+  .state('checkout', {
+    url: '/checkout',
+    cache: false,
+    templateUrl: "views/checkout.html"
   });
 
   $urlRouterProvider.otherwise('/');
@@ -67,6 +72,10 @@ angular.module('SmartShop', ['ionic', 'ui.router'])
       cost: 7.99
     }
   ];
+
+  $scope.proceedToCheckout = function() {
+    $state.go('checkout');
+  }
 
   $scope.weighItem = function() {
     return $http({
