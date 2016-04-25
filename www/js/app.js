@@ -63,50 +63,51 @@ angular.module('SmartShop', ['ionic', 'ui.router'])
 .controller('mainCtrl', function($scope, $ionicActionSheet, $ionicModal, $state, $http) {
 
   // This is our "database" shh
-  $scope.fetchItemInfo = function() {
+  $scope.fetchItemInfo = function(code) {
+    var ret;
     switch(code) {
-      case 12345:
-        return {
-          name: "Test Product",
-          code: 1234567890,
-          weight_required: true,
+      case '12345':
+        ret = {
+          name: "Test 12345",
+          code: 12345,
+          weight_required: false,
           weight: "0.3 kg",
           cost: 7.99
         };
-      case 12345678:
-        return {
-          name: "Test Product",
-          code: 1234567890,
-          weight_required: true,
+        break;
+      case '12345678':
+        ret = {
+          name: "Test 12345678",
+          code: 12345678,
+          weight_required: false,
           weight: "0.3 kg",
-          cost: 7.99
+          cost: 14.75
         };
-      case 123:
-        return {
-          name: "Test Product",
-          code: 1234567890,
-          weight_required: true,
+        break;
+      case '123':
+        ret = {
+          name: "Test 123",
+          code: 123,
+          weight_required: false,
           weight: "0.3 kg",
-          cost: 7.99
+          cost: 4.50
         };
-      case 8273928:
-        return {
-          name: "Test Product",
-          code: 1234567890,
-          weight_required: true,
+        break;
+      case '8273928':
+        ret = {
+          name: "Test 8273928",
+          code: 8273928,
+          weight_required: false,
           weight: "0.3 kg",
-          cost: 7.99
+          cost: 3.99
         };
+        break;
       default:
-        return -1;
+        ret = -1;
     }
-  }
 
-  $scope.newItem = {
-    code: 0,
-    value: 0,
-    unit: ''
-  };
+    return ret;
+  }
 
   $scope.receipts = [];
 
@@ -162,13 +163,13 @@ angular.module('SmartShop', ['ionic', 'ui.router'])
 
   $scope.push = function(code) {
     if (code == 123456 || code == '123456') {
-      $scope.newItem.code = code;
+      $scope.newItem = $scope.fetchItemInfo(code);
+      console.log($scope.newItem);
       $state.go('scale');
     } else {
-      $scope.cart.push({
-        name: code,
-        cost: 1.99
-      });
+      $scope.newItem = $scope.fetchItemInfo(code);
+      console.log($scope.newItem);
+      $scope.cart.push($scope.newItem);
       $state.go('cart');
     }
   }
@@ -208,14 +209,14 @@ angular.module('SmartShop', ['ionic', 'ui.router'])
                 console.log(result);
                 if (result.text != '') {
                   if (result.text == '123456') {
-                    $scope.newItem.code = result.text;
+                    $scope.newItem = $scope.fetchItemInfo(result.text);
+                    console.log($scope.newItem);
                     $state.go('scale');
                   } else {
                     $scope.$apply(function() {
-                      $scope.cart.push({
-                        name: result.text,
-                        cost: 1.99
-                      });
+                      $scope.newItem = $scope.fetchItemInfo(result.text);
+                      console.log($scope.newItem);
+                      $scope.cart.push($scope.newItem);
                     });
                   }
                 }
@@ -233,7 +234,6 @@ angular.module('SmartShop', ['ionic', 'ui.router'])
             break;
           default:
             console.log("Should never happen!");
-
         }
       }
     });
