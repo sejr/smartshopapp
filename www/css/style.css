@@ -10,3 +10,7 @@
 .lead strong {
   font-weight: 500;
 }
+
+.price {
+  font-size: 28px !important;
+}

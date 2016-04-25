@@ -62,6 +62,12 @@ angular.module('SmartShop', ['ionic', 'ui.router'])
 
 .controller('mainCtrl', function($scope, $ionicActionSheet, $ionicModal, $state, $http) {
 
+  $scope.reading = {
+    code: '',
+    value: 0,
+    unit: 'kg'
+  };
+
   // This is our "database" shh
   $scope.fetchItemInfo = function(code) {
     var ret;
@@ -82,6 +88,15 @@ angular.module('SmartShop', ['ionic', 'ui.router'])
           weight_required: false,
           weight: "0.3 kg",
           cost: 14.75
+        };
+        break;
+      case '123456':
+        ret = {
+          name: "Weighed Item 123456",
+          code: 123456,
+          weight_required: true,
+          weight: "",
+          cost: 5.99
         };
         break;
       case '123':
@@ -138,8 +153,8 @@ angular.module('SmartShop', ['ionic', 'ui.router'])
     $scope.weighItem().then(function success(res) {
       // $scope.testlol = "Hi again!";
       console.log(res);
-      $scope.newItem.value = res.data[0].value;
-      $scope.newItem.unit = res.data[0].unit;
+      $scope.reading.value = res.data[0].value;
+      $scope.reading.unit = res.data[0].unit;
       // $scope.reading.unit = res.data[0].unit;
     }, function error(res){
       console.log(res);
@@ -164,7 +179,7 @@ angular.module('SmartShop', ['ionic', 'ui.router'])
   $scope.push = function(code) {
     if (code == 123456 || code == '123456') {
       $scope.newItem = $scope.fetchItemInfo(code);
-      console.log($scope.newItem);
+      console.log("fetchItemInfo result: " + $scope.newItem);
       $state.go('scale');
     } else {
       $scope.newItem = $scope.fetchItemInfo(code);
@@ -175,10 +190,11 @@ angular.module('SmartShop', ['ionic', 'ui.router'])
   }
 
   $scope.pushWt = function() {
-    var cost = $scope.newItem.value * 1.99;
-    var weight = $scope.newItem.value.toString() + " " + $scope.newItem.unit;
+    console.log($scope.reading);
+    var cost = $scope.reading.value * $scope.newItem.cost;
+    var weight = $scope.reading.value.toString() + " " + $scope.reading.unit;
     var weighedItem = {
-      name: 'Weighed Product',
+      name: 'Weighed Product ' + $scope.newItem.code,
       code: $scope.newItem.code,
       weight_required: true,
       weight: weight,
@@ -209,6 +225,8 @@ angular.module('SmartShop', ['ionic', 'ui.router'])
                 console.log(result);
                 if (result.text != '') {
                   if (result.text == '123456') {
+                    // $scope.$apply(function() {})
+                    $scope.reading.code = result.text;
                     $scope.newItem = $scope.fetchItemInfo(result.text);
                     console.log($scope.newItem);
                     $state.go('scale');
