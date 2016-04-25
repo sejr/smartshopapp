@@ -27,7 +27,7 @@ angular.module('SmartShop', ['ionic', 'ui.router'])
 
   $stateProvider
   .state('intro', {
-    url: '/intro',
+    url: '/',
     cache: false,
     templateUrl: 'index.html'
   })
@@ -56,7 +56,7 @@ angular.module('SmartShop', ['ionic', 'ui.router'])
     templateUrl: "views/payment.html"
   });
 
-  $urlRouterProvider.otherwise('cart');
+  $urlRouterProvider.otherwise('/');
 
 })
 
