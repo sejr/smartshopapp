@@ -49,6 +49,11 @@ angular.module('SmartShop', ['ionic', 'ui.router'])
     url: '/checkout',
     cache: false,
     templateUrl: "views/checkout.html"
+  })
+  .state('payment', {
+    url: '/payment',
+    cache: false,
+    templateUrl: "views/payment.html"
   });
 
   $urlRouterProvider.otherwise('/');
@@ -57,11 +62,53 @@ angular.module('SmartShop', ['ionic', 'ui.router'])
 
 .controller('mainCtrl', function($scope, $ionicActionSheet, $ionicModal, $state, $http) {
 
+  // This is our "database" shh
+  $scope.fetchItemInfo = function() {
+    switch(code) {
+      case 12345:
+        return {
+          name: "Test Product",
+          code: 1234567890,
+          weight_required: true,
+          weight: "0.3 kg",
+          cost: 7.99
+        };
+      case 12345678:
+        return {
+          name: "Test Product",
+          code: 1234567890,
+          weight_required: true,
+          weight: "0.3 kg",
+          cost: 7.99
+        };
+      case 123:
+        return {
+          name: "Test Product",
+          code: 1234567890,
+          weight_required: true,
+          weight: "0.3 kg",
+          cost: 7.99
+        };
+      case 8273928:
+        return {
+          name: "Test Product",
+          code: 1234567890,
+          weight_required: true,
+          weight: "0.3 kg",
+          cost: 7.99
+        };
+      default:
+        return -1;
+    }
+  }
+
   $scope.newItem = {
     code: 0,
     value: 0,
     unit: ''
   };
+
+  $scope.receipts = [];
 
   $scope.cart = [
     {

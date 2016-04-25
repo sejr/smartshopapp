@@ -8,13 +8,13 @@
       <ion-list>
         <ion-item ng-repeat="item in cart">
           <strong>{{ item.name }}</strong><span ng-show="item.weight_required"> - {{ item.weight }}</span><span class="item-note"><strong>{{ item.cost | currency:'$' }}</strong></span>
-          <ion-option-button class="button-assertive" ng-click="removeFromList($index)">
+          <!-- <ion-option-button class="button-assertive" ng-click="removeFromList($index)">
             Remove
-          </ion-option-button>
+          </ion-option-button> -->
         </ion-item>
       </ion-list>
-      <button class="button button-full button-royal">
-        <span class="ion-card"></span> Enter Payment Information
+      <button class="button button-full button-royal" ui-sref="payment">
+        <span class="ion-card"></span> Pay with Card on Account (4242)
       </button>
       <!-- <button class="button button-full button-clear button-assertive" ng-click="signOut()"><strong>Sign Out</strong> (testing)</button> -->
     </ion-content>
