@@ -9,11 +9,11 @@
     <ion-content>
       <ion-list>
         <ion-item class="item-thumbnail-left" ng-repeat="item in cart">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Cat_March_2010-1.jpg">
-          <h2>{{ item.name }}</h2>
-          <p ng-show="item.weight_required">{{ item.weight }}</p>
-          <p class="text-right price">{{ item.cost | currency:'$' }}</p>
-          <ion-option-button class="button-assertive" ng-click="removeFromList($index)">
+          <img ng-src="{{ item.image }}">
+          <h2>{{ item.name }} <span ng-show="item.weight_required">({{ item.weight }})</span></h2>
+          <!-- <p ng-show="item.weight_required">{{ item.weight }}</p> -->
+          <p class="price">{{ item.cost | currency:'$' }}</p>
+          <ion-option-button class="button-assertive" ng-click="removeFromList(item)">
             Remove
           </ion-option-button>
         </ion-item>
